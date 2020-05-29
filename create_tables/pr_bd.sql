@@ -1,47 +1,47 @@
 --------
-BEGIN;
+BEGIN transaction;
 ---------
 ------------------------------------SUPPLIER------------------------------------
 ---------
 
 CREATE TABLE supplier (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	firm varchar(255),
-    addres varchar(100) NOT NULL UNIQUE
-	phone varchar(20)
-	email varchar(100) NOT NULL UNIQUE
+    addres varchar(100) NOT NULL UNIQUE,
+	phone varchar (200),
+	email varchar (100) NOT NULL UNIQUE
 );
 
-INSERT INTO supplier (firm, addres, phone, email)
-            VALUES
-            (DEFAULT, 'Reichel, Kozey and Barrows', '1-500-108-6242 x5245', 'Dante.Prohaska50@yahoo.com'),
-            (DEFAULT, 'Kunde and Sons', '139-924-9420', 'Brock.Thiel@hotmail.com'),
-            (DEFAULT, 'MacGyver, Cassin and Renner', '1-840-574-3276 x0286', 'Chaya39@gmail.com'),
-            (DEFAULT, 'Russel Group', '(201) 135-9999 x801', 'Adolph56@gmail.com'),
-            (DEFAULT, 'Bogisich LLC', '726-352-9784', 'Abbigail91@hotmail.com'),
-            (DEFAULT, 'Dare Group', '(046) 945-9512 x4307', 'Arianna_Cruickshank66@gmail.com'),
-            (DEFAULT, 'Hand - Wilkinson', '880.067.0282 x14574', 'Eloy_DuBuque20@gmail.com'),
-            (DEFAULT, 'Romaguera, Champlin and Hilll', '103-490-2394', 'Berry17@hotmail.com'),
-            (DEFAULT, 'Koss LLC', '925-871-0715 x565', 'Clifford83@gmail.com'),
-            (DEFAULT, 'Nitzsche - Nienow', '903-137-9853', 'Birdie.Stokes@gmail.com');
 
+INSERT INTO supplier (id, firm, addres, phone, email)
+                    VALUES
+(DEFAULT, 'Erdman LLC', 'East Fredericfurt','481-303-7788', 'Anne.Predovic@gmail.com'),
+(DEFAULT, 'Gerlach, Collier and Walker', 'North Rashad','266-432-6248', 'Morris22@hotmail.com'),
+(DEFAULT, 'Littel - Dicki', 'South Justine','955.560.3336', 'Giuseppe.VonRueden83@yahoo.com'),
+(DEFAULT, 'Hegmann - Smitham', 'North Dawnshire','1-107-623-6121 x98710', 'Carroll79@yahoo.com'),
+(DEFAULT, 'Jacobson - Watsica', 'Port Travisfort','791-293-0097 x7889', 'Elisabeth41@hotmail.com'),
+(DEFAULT, 'Von LLC', 'West Triston','1-011-437-4292 x1717', 'Christa_Legros@hotmail.com'),
+(DEFAULT, 'Murphy, Kutch and Bernhard', 'East Kian','(195) 935-4470', 'Martina.Osinski31@hotmail.com'),
+(DEFAULT, 'Sauer, Torp and Krajcik', 'Stoltenbergside','158-317-5547 x31706', 'Jakayla12@gmail.com'),
+(DEFAULT, 'Vandervort, Wehner and Gorczany', 'Steuberberg','433.450.4470', 'Bertrand_Gerlach41@hotmail.com'),
+(DEFAULT, 'Powlowski, Nolan and Walsh', 'Elbertburgh','(390) 044-7798 x762', 'Cornell_Blick79@hotmail.com');
 
 
 ---------
-------------------------------------MARKET-----------------------
+------------------------------------shop-----------------------
 ---------
 
-CREATE TABLE market (
-	id serial PRIMARY KEY,
+CREATE TABLE shop (
+	id integer PRIMARY KEY,
 	name varchar(255),
-	town varchar(100),-- DEFAULT 'Москва',
+	town varchar(100),
 	street varchar(100),
 	house varchar(20),
     open_date varchar(100),
-	close_date varchar(100),
+	close_date varchar(100)
 );
 
-INSERT INTO market (id, name, town, street, house, open_date, close_date)
+INSERT INTO shop (id, name, town, street, house, open_date, close_date)
             VALUES
             (DEFAULT, 'John', 'Cartwrightfurt', 'Guiseppe Hollow', 52, '2013-07-14T06:11:40.386Z', '2016-10-17T02:19:53.922Z'),
             (DEFAULT, 'Deven', 'Lake Collin', 'Gleason Forge', 75, '2010-08-09T12:22:10.578Z', '2014-06-11T10:43:58.681Z'),
@@ -60,14 +60,15 @@ INSERT INTO market (id, name, town, street, house, open_date, close_date)
 ---------
 
 CREATE TABLE product (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255),
 	quality varchar(255),
 	count_in_storage varchar(500),
+	    special_discount_id integer REFERENCES special_discount,
 	description varchar(200)
 );
 
-INSERT INTO product (name, quality, count_in_storage, description)
+INSERT INTO product (id, name, quality, count_in_storage, description)
              VALUES
             (DEFAULT, 'Awesome Fresh Cheese', 'Sleek', 152, 'Towels'),
             (DEFAULT, 'Tasty Wooden Bacon', 'Unbranded', 71, 'Chips'),
@@ -85,13 +86,13 @@ INSERT INTO product (name, quality, count_in_storage, description)
 ---------
 
 CREATE TABLE yellow_price (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	individual varchar(255),
 	_public varchar(255),
-	sum_price varchar(255),
+	sum_price varchar(255)
 );
 
-INSERT INTO yellow_price (individual, _public, sum_price)
+INSERT INTO yellow_price (id, individual, _public, sum_price)
             VALUES
             (DEFAULT, '594.00', '495.00', '964.00'),
             (DEFAULT, '640.00', '576.00', '938.00'),
@@ -109,12 +110,12 @@ INSERT INTO yellow_price (individual, _public, sum_price)
 ---------
 
 CREATE TABLE price (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
     price_before varchar(255),
-	price_after varchar(255),
+	price_after varchar(255)
 );
 
-INSERT INTO price (price_before, price_after)
+INSERT INTO price (id, price_before, price_after)
              VALUES
 (DEFAULT, '441.00', '256.00'),
 (DEFAULT, '426.00', '789.00'),
@@ -132,11 +133,11 @@ INSERT INTO price (price_before, price_after)
 ---------
 
 CREATE TABLE discount_card (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	card_number varchar(255)
     );
 
-INSERT INTO discount_card (card_number)
+INSERT INTO discount_card (id, card_number)
             VALUES
             (DEFAULT, 230273),
             (DEFAULT, 48682),
@@ -154,14 +155,14 @@ INSERT INTO discount_card (card_number)
 ---------
 
 CREATE TABLE costumer (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255),
 	surname varchar(255),
 	email varchar(255),
 	phone varchar(255)
 );
 
-INSERT INTO costumer (name, surname, email, phone)
+INSERT INTO costumer (id, name, surname, email, phone)
              VALUES
     (DEFAULT, 'Koss - Jacobson', 'Hoppeshire', 'River.Block@yahoo.com', '(888) 008-5245 x349'),
     (DEFAULT, 'Mills - Kuphal', 'West Niko', 'Bria_Schmeler@yahoo.com', '(558) 736-1244'),
@@ -179,12 +180,12 @@ INSERT INTO costumer (name, surname, email, phone)
 ---------
 
 CREATE TABLE special_discount (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255),
     description varchar(255)
 );
 
-INSERT INTO special_discount (name, desctiplion)
+INSERT INTO special_discount (id, name, desctiplion)
              VALUES
 (DEFAULT, 'emulation Interactions', 'out-of-the-box Executive'),
 (DEFAULT, 'capacitor', 'Refined navigating'),
@@ -202,12 +203,13 @@ INSERT INTO special_discount (name, desctiplion)
 ---------
 
 CREATE TABLE buy (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	create_data varchar(255),
-	create_time varchar(255),
+	 shop_id integer REFERENCES shop,
+	create_time varchar(255)
 );
 
-INSERT INTO buy (create_data, desctiplion)
+INSERT INTO buy (id, create_data, desctiplion)
              VALUES
 (DEFAULT, '2012-10-26', '14:24:25'),
 (DEFAULT, '2012-06-30', '06:52:14'),
@@ -225,12 +227,15 @@ INSERT INTO buy (create_data, desctiplion)
 ---------
 
 CREATE TABLE suply_product (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	count_product varchar(255),
+	 supplier_id integer REFERENCES supplier,
+    staff_id integer REFERENCES staff,
+    shop_id integer REFERENCES shop,
 	price_product varchar(255)
 );
 
-INSERT INTO suply_product (count_product, price_product)
+INSERT INTO suply_product (id,count_product, price_product)
              VALUES
 (DEFAULT,  439, '588.00'),
 (DEFAULT,  435, '343.00'),
@@ -248,7 +253,7 @@ INSERT INTO suply_product (count_product, price_product)
 ---------
 
 CREATE TABLE staff (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255),
 	surname varchar(255),
 	contacts varchar(255),
@@ -275,24 +280,88 @@ INSERT INTO staff (name, surname, email, phone)
 ---------
 
 CREATE TABLE division (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255),
 	description varchar(255),
+	department_id integer REFERENCES department,
 	start_date varchar(255)
 );
+
+INSERT INTO division (start_data, desctiplion)
+             VALUES
+(DEFAULT, '2015-05-14T04:01:18.546Z', 'capacitor'),
+(DEFAULT, '2014-05-07T01:10:49.613Z', 'Euro'),
+(DEFAULT, '2017-01-15T09:03:51.456Z', 'Roads'),
+(DEFAULT, '2014-07-25T05:16:17.706Z', 'streamline'),
+(DEFAULT, '2016-12-17T19:25:38.853Z', 'Integration'),
+(DEFAULT, '2012-04-28T01:57:51.305Z', 'Turkish Lira'),
+(DEFAULT, '2015-02-15T20:46:20.674Z', 'Lead'),
+(DEFAULT, '2010-09-18T06:44:59.861Z', 'Washington'),
+(DEFAULT, '2012-02-06T01:14:12.775Z', 'functionalities'),
+(DEFAULT, '2010-09-23T13:51:55.377Z', 'Money shop Account');
 
 ---------
 ------------------------------------DEPARTMENT------------------------------------
 ---------
 
 CREATE TABLE department (
-	id serial PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name varchar(255)
 );
 
+INSERT INTO department (id, name)
+             VALUES
+            (DEFAULT, 'Organic mobile database'),
+            (DEFAULT, 'Centralized mobile hub'),
+            (DEFAULT, 'Proactive multi-tasking policy'),
+            (DEFAULT, 'Re-contextualized uniform customer loyalty'),
+            (DEFAULT, 'Managed local time-frame'),
+            (DEFAULT, 'Down-sized system-worthy algorithm'),
+            (DEFAULT, 'Ergonomic actuating customer loyalty'),
+            (DEFAULT, 'Ameliorated value-added productivity'),
+            (DEFAULT, 'Open-source background capacity'),
+            (DEFAULT, 'Universal even-keeled artificial intelligence');
+
+CREATE TABLE staff_division (
+    division_id integer REFERENCES division,
+    staff_id integer REFERENCES staff
+);
 
 
+CREATE TABLE staff_shop (
+    shop_id integer REFERENCES shop,
+    staff_id integer REFERENCES staff
+);
 
+CREATE TABLE product_shop (
+    shop_id integer REFERENCES shop,
+    product_id integer REFERENCES product
+);
+
+CREATE TABLE product_yellow_price (
+    yellow_price_id integer REFERENCES yellow_price,
+    product_id integer REFERENCES product
+);
+
+CREATE TABLE product_price (
+    price_id integer REFERENCES price,
+    product_id integer REFERENCES product
+);
+
+CREATE TABLE discount_card_special_discount (
+    special_discount_id integer REFERENCES special_discount,
+    discount_card_id integer REFERENCES  discount_card
+);
+
+CREATE TABLE discount_card_costumer (
+    costumer_id integer REFERENCES costumer,
+    discount_card_id integer REFERENCES  discount_card
+);
+
+CREATE TABLE bill_costumer (
+    costumer_id integer REFERENCES costumer,
+    bill_id integer REFERENCES  bill
+);
 
 ---------
-COMMIT;
+COMMIT transaction;
