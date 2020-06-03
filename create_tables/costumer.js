@@ -8,8 +8,8 @@ console.log(inst)
 	const maxID_costumer = 10
     
 	for (let i = minID_costumer - 1; i < maxID_costumer; i++) {
-		const name = faker.company.companyName()
-		const surname = faker.address.city()
+		const name = faker.name.firstName()
+		const surname = faker.name.lastName()
 		const phone = faker.phone.phoneNumber()
 		const email = faker.internet.email()
 		

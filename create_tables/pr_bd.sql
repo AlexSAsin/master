@@ -5,12 +5,13 @@ BEGIN transaction;
 ---------
 
 CREATE TABLE supplier (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	firm varchar(255),
     addres varchar(100) NOT NULL UNIQUE,
 	phone varchar (200),
 	email varchar (100) NOT NULL UNIQUE
 );
+
 
 
 INSERT INTO supplier (id, firm, addres, phone, email)
@@ -32,7 +33,7 @@ INSERT INTO supplier (id, firm, addres, phone, email)
 ---------
 
 CREATE TABLE shop (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	name varchar(255),
 	town varchar(100),
 	street varchar(100),
@@ -56,37 +57,11 @@ INSERT INTO shop (id, name, town, street, house, open_date, close_date)
 
 
 ---------
-------------------------------------PRODUCT------------------------------------
----------
-
-CREATE TABLE product (
-	id integer PRIMARY KEY,
-	name varchar(255),
-	quality varchar(255),
-	count_in_storage varchar(500),
-	    special_discount_id integer REFERENCES special_discount,
-	description varchar(200)
-);
-
-INSERT INTO product (id, name, quality, count_in_storage, description)
-             VALUES
-            (DEFAULT, 'Awesome Fresh Cheese', 'Sleek', 152, 'Towels'),
-            (DEFAULT, 'Tasty Wooden Bacon', 'Unbranded', 71, 'Chips'),
-            (DEFAULT, 'Intelligent Soft Tuna', 'Sleek', 256, 'Sausages'),
-            (DEFAULT, 'Gorgeous Plastic Towels', 'Fantastic', 440, 'Bike'),
-            (DEFAULT, 'Fantastic Frozen Pizza', 'Intelligent', 479, 'Gloves'),
-            (DEFAULT, 'Ergonomic Fresh Chips', 'Incredible', 39, 'Table'),
-            (DEFAULT, 'Sleek Rubber Car', 'Fantastic', 469, 'Shoes'),
-            (DEFAULT, 'Refined Concrete Fish', 'Small', 482, 'Computer'),
-            (DEFAULT, 'Handcrafted Fresh Shoes', 'Handmade', 240, 'Chair'),
-            (DEFAULT, 'Tasty Granite Chicken', 'Practical', 368, 'Table');
-
----------
 ------------------------------------YELLOW_PRICE------------------------------------
 ---------
 
 CREATE TABLE yellow_price (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	individual varchar(255),
 	_public varchar(255),
 	sum_price varchar(255)
@@ -110,7 +85,7 @@ INSERT INTO yellow_price (id, individual, _public, sum_price)
 ---------
 
 CREATE TABLE price (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
     price_before varchar(255),
 	price_after varchar(255)
 );
@@ -133,7 +108,7 @@ INSERT INTO price (id, price_before, price_after)
 ---------
 
 CREATE TABLE discount_card (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	card_number varchar(255)
     );
 
@@ -155,37 +130,38 @@ INSERT INTO discount_card (id, card_number)
 ---------
 
 CREATE TABLE costumer (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	name varchar(255),
 	surname varchar(255),
 	email varchar(255),
 	phone varchar(255)
 );
 
+
 INSERT INTO costumer (id, name, surname, email, phone)
              VALUES
-    (DEFAULT, 'Koss - Jacobson', 'Hoppeshire', 'River.Block@yahoo.com', '(888) 008-5245 x349'),
-    (DEFAULT, 'Mills - Kuphal', 'West Niko', 'Bria_Schmeler@yahoo.com', '(558) 736-1244'),
-    (DEFAULT, 'Hansen - Reichel', 'Lake Mozelleberg', 'Veda43@hotmail.com', '795-043-5876 x590'),
-    (DEFAULT, 'Krajcik, Nolan and Bayer', 'North Dorachester', 'Oren_Brown@hotmail.com', '1-502-140-2010 x603'),
-    (DEFAULT, 'Bednar, Hamill and Adams', 'North Ervin', 'Cordelia.Morar@yahoo.com', '(374) 495-8026 x66459'),
-    (DEFAULT, 'Steuber Inc', 'South Presley', 'Charley20@hotmail.com', '(300) 752-4872'),
-    (DEFAULT, 'Hermann LLC', 'Maceystad', 'Jacky57@yahoo.com', '1-923-874-2727 x747'),
-    (DEFAULT, 'Kuhic - Kutch', 'North Kiantown', 'Carlee_Greenfelder@gmail.com', '(207) 681-4587'),
-    (DEFAULT, 'Reynolds, Crist and Schmeler', 'VonRuedenberg', 'Hildegard_Stehr13@hotmail.com', '(621) 326-1321'),
-    (DEFAULT, 'Paucek Inc', 'McKenzieborough', 'Desmond96@hotmail.com', '348-683-1369');
+(DEFAULT, 'Mariane', 'Skiles', 'Milford.Ruecker43@yahoo.com', '(789) 274-7819 x42990'),
+(DEFAULT, 'Kole', 'Friesen', 'Vidal.Kub@hotmail.com', '(058) 159-7873'),
+(DEFAULT, 'Gisselle', 'Metz', 'Esta.Glover94@yahoo.com', '1-188-366-7538 x5635'),
+(DEFAULT, 'Jordi', 'Ryan', 'Roberta92@yahoo.com', '683.122.4981'),
+(DEFAULT, 'Blake', 'Beatty', 'Emery.Smith@yahoo.com', '310-224-6471'),
+(DEFAULT, 'Laurianne', 'Dietrich', 'Toy.Osinski37@hotmail.com', '(684) 392-4854'),
+(DEFAULT, 'Hettie', 'Bode', 'Alden28@gmail.com', '(151) 832-5564'),
+(DEFAULT, 'Archibald', 'Corkery', 'Alia_Sanford@hotmail.com', '539-801-8724 x3635'),
+(DEFAULT, 'Emmet', 'Torphy', 'Bryon.Rutherford55@gmail.com', '1-130-084-2641 x1193'),
+(DEFAULT, 'Isac', 'Frami', 'Mortimer13@gmail.com', '(504) 956-1791 x6986');
 
 ---------
 ------------------------------------SPECIAL_DISCOUNT------------------------------------
 ---------
 
 CREATE TABLE special_discount (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	name varchar(255),
     description varchar(255)
 );
 
-INSERT INTO special_discount (id, name, desctiplion)
+INSERT INTO special_discount (id, name, description)
              VALUES
 (DEFAULT, 'emulation Interactions', 'out-of-the-box Executive'),
 (DEFAULT, 'capacitor', 'Refined navigating'),
@@ -198,38 +174,140 @@ INSERT INTO special_discount (id, name, desctiplion)
 (DEFAULT, 'Wooden California', 'Officer Yuan Renminbi'),
 (DEFAULT, 'Buckinghamshire Home Program', 'Senior SCSI connecting');
 
+
+
+---------
+------------------------------------PRODUCT------------------------------------
+---------
+
+CREATE TABLE product (
+	id serial PRIMARY KEY,
+	name varchar(255),
+	quality varchar(255),
+	count_in_storage varchar(500),
+	special_discount_id integer REFERENCES special_discount,
+	description varchar(200)
+);
+
+INSERT INTO product (id, name, quality, count_in_storage, description)
+             VALUES
+            (DEFAULT, 'Awesome Fresh Cheese', 'Sleek', 152, 'Towels'),
+            (DEFAULT, 'Tasty Wooden Bacon', 'Unbranded', 71, 'Chips'),
+            (DEFAULT, 'Intelligent Soft Tuna', 'Sleek', 256, 'Sausages'),
+            (DEFAULT, 'Gorgeous Plastic Towels', 'Fantastic', 440, 'Bike'),
+            (DEFAULT, 'Fantastic Frozen Pizza', 'Intelligent', 479, 'Gloves'),
+            (DEFAULT, 'Ergonomic Fresh Chips', 'Incredible', 39, 'Table'),
+            (DEFAULT, 'Sleek Rubber Car', 'Fantastic', 469, 'Shoes'),
+            (DEFAULT, 'Refined Concrete Fish', 'Small', 482, 'Computer'),
+            (DEFAULT, 'Handcrafted Fresh Shoes', 'Handmade', 240, 'Chair'),
+            (DEFAULT, 'Tasty Granite Chicken', 'Practical', 368, 'Table');
+
 ---------
 ------------------------------------BUY------------------------------------
 ---------
 
 CREATE TABLE buy (
-	id integer PRIMARY KEY,
-	create_data varchar(255),
-	 shop_id integer REFERENCES shop,
-	create_time varchar(255)
+	id serial PRIMARY KEY,
+	create_data TIMESTAMP,
+    summ NUMERIC,
+	 shop_id integer REFERENCES shop
 );
 
-INSERT INTO buy (id, create_data, desctiplion)
+INSERT INTO buy (id, create_data, summ)
              VALUES
-(DEFAULT, '2012-10-26', '14:24:25'),
-(DEFAULT, '2012-06-30', '06:52:14'),
-(DEFAULT, '2017-11-19', '06:57:52'),
-(DEFAULT, '2012-07-19', '17:30:55'),
-(DEFAULT, '2016-10-12', '05:48:55'),
-(DEFAULT, '2012-05-29', '16:03:22'),
-(DEFAULT, '2013-01-02', '22:45:35'),
-(DEFAULT, '2013-06-01', '21:05:38'),
-(DEFAULT, '2011-06-27', '00:18:22'),
-(DEFAULT, '2010-08-29', '07:05:23');
+             
+(DEFAULT, '2019-09-01T09:14:48.495Z', '12000'),
+(DEFAULT, '2016-09-11T08:38:10.675Z', '8000'),
+(DEFAULT, '2017-04-08T13:05:09.482Z', '450'),
+(DEFAULT, '2012-09-22T01:19:27.506Z', '20000'),
+(DEFAULT, '2010-08-24T07:34:52.025Z', '900'),
+(DEFAULT, '2011-10-23T22:29:52.382Z', '500'),
+(DEFAULT, '2013-06-09T20:23:51.347Z', '1200'),
+(DEFAULT, '2012-02-29T11:10:29.787Z', '850'),
+(DEFAULT, '2020-01-20T05:29:01.104Z', '14000'),
+(DEFAULT, '2019-03-05T10:22:01.702Z', '4000'); 
+---------
+------------------------------------STAFF------------------------------------
+---------
 
+CREATE TABLE staff (
+	id serial PRIMARY KEY,
+	name varchar(255),
+	surname varchar(255),
+	contacts varchar(255),
+	birth varchar(255),
+    residence_permit varchar(255),
+	timetable varchar(255)
+);
+
+INSERT INTO staff (id, name, surname, contacts, birth, residence_permit, timetable)
+             VALUES
+(DEFAULT, 'Fern', 'Mante', '859-062-4566 x05838', '2020-05-06T04:04:21.930Z', '3939 Dock Road', 'Thursday'),
+(DEFAULT, 'Orval', 'Crooks', '069.615.7812 x80021', '2019-12-10T12:34:55.065Z', '5624 Hermiston Roads', 'Sunday'),
+(DEFAULT, 'Margie', 'Ullrich', '695.090.6023 x340', '2020-02-04T13:37:51.049Z', '3842 Abernathy Pass', 'Saturday'),
+(DEFAULT, 'Aidan', 'Halvorson', '1-785-630-2643', '2019-07-26T08:55:46.997Z', '50886 Schroeder Plaza', 'Tuesday'),
+(DEFAULT, 'Judd', 'Gusikowski', '521.234.2834', '2020-04-08T23:53:08.766Z', '73734 Sigurd Pines', 'Tuesday'),
+(DEFAULT, 'Ezequiel', 'Kuhlman', '474.965.3487 x5163', '2019-09-17T14:13:30.692Z', '2281 Hudson Fall', 'Wednesday'),
+(DEFAULT, 'Lula', 'Zemlak', '340.821.3072 x6355', '2019-09-22T13:09:52.558Z', '445 Al Ranch', 'Thursday'),
+(DEFAULT, 'Desmond', 'Zboncak', '650-703-3414', '2019-06-12T06:04:26.967Z', '1320 White Parkways', 'Tuesday'),
+(DEFAULT, 'Ryley', 'Mohr', '595.341.3451 x04372', '2020-02-14T08:45:48.270Z', '847 Reilly Street', 'Friday'),
+(DEFAULT, 'Mandy', 'Feeney', '777-123-7593 x90519', '2020-05-02T18:21:54.068Z', '385 Gerhold Field', 'Wednesday');
+
+---------
+------------------------------------DEPARTMENT------------------------------------
+---------
+
+CREATE TABLE department (
+	id serial PRIMARY KEY,
+	name varchar(255)
+);
+
+INSERT INTO department (id, name)
+             VALUES
+            (DEFAULT, 'Organic mobile database'),
+            (DEFAULT, 'Centralized mobile hub'),
+            (DEFAULT, 'Proactive multi-tasking policy'),
+            (DEFAULT, 'Re-contextualized uniform customer loyalty'),
+            (DEFAULT, 'Managed local time-frame'),
+            (DEFAULT, 'Down-sized system-worthy algorithm'),
+            (DEFAULT, 'Ergonomic actuating customer loyalty'),
+            (DEFAULT, 'Ameliorated value-added productivity'),
+            (DEFAULT, 'Open-source background capacity'),
+            (DEFAULT, 'Universal even-keeled artificial intelligence');
+
+
+---------
+------------------------------------DIVISION------------------------------------
+---------
+
+CREATE TABLE division (
+	id serial PRIMARY KEY,
+	name varchar(255),
+	description varchar(255),
+	department_id integer REFERENCES department,
+	start_date TIMESTAMP
+);
+
+INSERT INTO division (id, start_date, description)
+             VALUES
+(DEFAULT, '2015-05-14T04:01:18.546Z', 'capacitor'),
+(DEFAULT, '2014-05-07T01:10:49.613Z', 'Euro'),
+(DEFAULT, '2017-01-15T09:03:51.456Z', 'Roads'),
+(DEFAULT, '2014-07-25T05:16:17.706Z', 'streamline'),
+(DEFAULT, '2016-12-17T19:25:38.853Z', 'Integration'),
+(DEFAULT, '2012-04-28T01:57:51.305Z', 'Turkish Lira'),
+(DEFAULT, '2015-02-15T20:46:20.674Z', 'Lead'),
+(DEFAULT, '2010-09-18T06:44:59.861Z', 'Washington'),
+(DEFAULT, '2012-02-06T01:14:12.775Z', 'functionalities'),
+(DEFAULT, '2010-09-23T13:51:55.377Z', 'Money shop Account');
 ---------
 ------------------------------------SUPLY_PRODUCT------------------------------------
 ---------
 
 CREATE TABLE suply_product (
-	id integer PRIMARY KEY,
+	id serial PRIMARY KEY,
 	count_product varchar(255),
-	 supplier_id integer REFERENCES supplier,
+	supplier_id integer REFERENCES supplier,
     staff_id integer REFERENCES staff,
     shop_id integer REFERENCES shop,
 	price_product varchar(255)
@@ -248,79 +326,27 @@ INSERT INTO suply_product (id,count_product, price_product)
 (DEFAULT,  401, '276.00'),
 (DEFAULT,  353, '896.00');
 
----------
-------------------------------------STAFF------------------------------------
----------
 
-CREATE TABLE staff (
-	id integer PRIMARY KEY,
-	name varchar(255),
-	surname varchar(255),
-	contacts varchar(255),
-	birth varchar(255),
-    residence_permit varchar(255),
-    timetable varchar(255)
+CREATE TABLE timetable (
+	id serial PRIMARY KEY,
+	staff_id integer REFERENCES staff,
+	start timestamp,
+    finish timestamp
 );
 
-INSERT INTO staff (name, surname, email, phone)
-             VALUES
-(DEFAULT, 'Keyshawn', 'Mueller', '(512) 874-6656', '2019-06-15', '801 Nicolas Glens', 'Friday'),
-(DEFAULT, 'Christophe', 'Morissette', '133-799-7998 x35986', '2020-05-04', '5206 Ernesto Forest', 'Thursday'),
-(DEFAULT, 'Ally', 'Kuvalis', '1-661-348-1575 x87931', '2020-04-03', '48397 Araceli Port', 'Wednesday'),
-(DEFAULT, 'Domenica', 'Jakubowski', '1-250-760-7178 x71763', '2019-07-20', '837 Darron Islands', 'Sunday'),
-(DEFAULT, 'Katelin', 'Labadie', '(720) 569-4161 x942', '2020-03-02', '3095 Hester Key', 'Sunday'),
-(DEFAULT, 'Antonina', 'Ferry', '1-479-559-7414 x6798', '2019-08-13', '378 Durgan Path', 'Friday'),
-(DEFAULT, 'Rosalinda', 'Ankunding', '1-288-204-3984', '2020-05-18', '9059 Gust Trail', 'Saturday'),
-(DEFAULT, 'Grayson', 'Hoppe', '904.094.3165', '2019-11-20', '48592 Raynor Shores', 'Monday'),
-(DEFAULT, 'Derek', 'Lesch', '(395) 453-1493 x3930', '2019-12-14', '713 Johnston Junction', 'Wednesday'),
-(DEFAULT, 'Forrest', 'Farrell', '1-418-951-7537', '2019-12-29', '52739 McGlynn Views', 'Friday');
+INSERT INTO timetable (id, staff_id, start, finish)
+VALUES
+(DEFAULT, DEFAULT, '2013-05-05T06:59:14.643Z', '2012-04-17T23:41:04.162Z'),
+(DEFAULT, DEFAULT, '2015-04-07T18:21:31.218Z', '2014-03-11T22:59:25.923Z'),
+(DEFAULT, DEFAULT, '2016-12-10T03:05:42.654Z', '2018-02-15T20:33:28.374Z'),
+(DEFAULT, DEFAULT, '2015-01-10T04:38:24.027Z', '2016-05-09T19:49:29.389Z'),
+(DEFAULT, DEFAULT, '2011-04-26T03:32:40.986Z', '2014-02-07T03:25:26.366Z'),
+(DEFAULT, DEFAULT, '2017-07-02T16:34:26.538Z', '2014-09-13T07:52:39.096Z'),
+(DEFAULT, DEFAULT, '2017-08-17T13:25:10.986Z', '2017-12-11T16:45:46.581Z'),
+(DEFAULT, DEFAULT, '2011-10-18T15:41:09.982Z', '2014-10-22T13:56:43.357Z'),
+(DEFAULT, DEFAULT, '2012-08-22T05:24:02.317Z', '2020-02-02T20:26:50.990Z'),
+(DEFAULT, DEFAULT, '2017-07-04T06:08:49.328Z', '2011-12-15T20:12:26.749Z');
 
----------
-------------------------------------DIVISION------------------------------------
----------
-
-CREATE TABLE division (
-	id integer PRIMARY KEY,
-	name varchar(255),
-	description varchar(255),
-	department_id integer REFERENCES department,
-	start_date varchar(255)
-);
-
-INSERT INTO division (start_data, desctiplion)
-             VALUES
-(DEFAULT, '2015-05-14T04:01:18.546Z', 'capacitor'),
-(DEFAULT, '2014-05-07T01:10:49.613Z', 'Euro'),
-(DEFAULT, '2017-01-15T09:03:51.456Z', 'Roads'),
-(DEFAULT, '2014-07-25T05:16:17.706Z', 'streamline'),
-(DEFAULT, '2016-12-17T19:25:38.853Z', 'Integration'),
-(DEFAULT, '2012-04-28T01:57:51.305Z', 'Turkish Lira'),
-(DEFAULT, '2015-02-15T20:46:20.674Z', 'Lead'),
-(DEFAULT, '2010-09-18T06:44:59.861Z', 'Washington'),
-(DEFAULT, '2012-02-06T01:14:12.775Z', 'functionalities'),
-(DEFAULT, '2010-09-23T13:51:55.377Z', 'Money shop Account');
-
----------
-------------------------------------DEPARTMENT------------------------------------
----------
-
-CREATE TABLE department (
-	id integer PRIMARY KEY,
-	name varchar(255)
-);
-
-INSERT INTO department (id, name)
-             VALUES
-            (DEFAULT, 'Organic mobile database'),
-            (DEFAULT, 'Centralized mobile hub'),
-            (DEFAULT, 'Proactive multi-tasking policy'),
-            (DEFAULT, 'Re-contextualized uniform customer loyalty'),
-            (DEFAULT, 'Managed local time-frame'),
-            (DEFAULT, 'Down-sized system-worthy algorithm'),
-            (DEFAULT, 'Ergonomic actuating customer loyalty'),
-            (DEFAULT, 'Ameliorated value-added productivity'),
-            (DEFAULT, 'Open-source background capacity'),
-            (DEFAULT, 'Universal even-keeled artificial intelligence');
 
 CREATE TABLE staff_division (
     division_id integer REFERENCES division,
@@ -358,10 +384,32 @@ CREATE TABLE discount_card_costumer (
     discount_card_id integer REFERENCES  discount_card
 );
 
-CREATE TABLE bill_costumer (
+CREATE TABLE buy_costumer (
     costumer_id integer REFERENCES costumer,
-    bill_id integer REFERENCES  bill
+    buy_id integer REFERENCES  buy
 );
+------------------
+
+create table receipt 
+(	id serial PRIMARY KEY,
+	count integer,
+	product_id integer REFERENCES product,
+ 	value varchar(255),
+	buy_id integer REFERENCES buy
+);
+
+INSERT INTO receipt (id, count, value)
+VALUES
+(DEFAULT,  2, '588.00'),
+(DEFAULT,  3, '343.00'),
+(DEFAULT,  4, '89.00'),
+(DEFAULT,  5, '10.00'),
+(DEFAULT,  6, '29.00'),
+(DEFAULT,  7, '37.00'),
+(DEFAULT,  8, '208.00'),
+(DEFAULT,  2, '91.00'),
+(DEFAULT,  3, '276.00'),
+(DEFAULT,  5, '86.00');
 
 ---------
 COMMIT transaction;

@@ -1,6 +1,6 @@
 const faker = require('faker')
 
-const inst = `INSERT INTO staff (name, surname, email, phone)
+const inst = `INSERT INTO staff (id, name, surname, contacts, birth,residence_permit, timetable)
              VALUES`
 console.log(inst)
 
@@ -12,12 +12,11 @@ console.log(inst)
 		const surname = faker.name.lastName()
 		const contacts = faker.phone.phoneNumber()
         const birth = faker.date.past().toISOString()
-        var bir = birth.slice(0, 10)
-        const contresidence_permitacts = faker.address.streetAddress()
+        const residence_permit = faker.address.streetAddress()
         const timetable = faker.date.weekday()
 		
-        genInsert_staff = `(DEFAULT, '${name}', '${surname}', '${contacts}', '${bir}', '${contresidence_permitacts}', '${timetable}'),`
-console.log(genInsert_staff)
+        genInsert_staff = `(DEFAULT, '${name}', '${surname}', '${contacts}', '${birth}', '${residence_permit}', '${timetable}'),`
+        console.log(genInsert_staff)
 
     }
     
